@@ -5,7 +5,7 @@ const token = process.env.BOT_TOKEN;
 const rootId = process.env.ROOT_ID;
 
 // Create a bot that uses `polling` to fetch new updates
-const bot = new TelegramBot(token);
+const bot = new TelegramBot(token, {polling: true});
 
 // Listen for any kind of message. There are different kinds of
 // messages.
@@ -21,6 +21,13 @@ id:${me.id} ${me.first_name || ``} ${me.last_name || ``}${me.username ? ` @${me.
   bot.sendMessage(msg.chat.id, message, {parse_mode: `Markdown`});
 });
 
-module.exports = (message) => {
+const sendToRoot = (message) => {
+  console.log(`Sending message: ${message}`);
   bot.sendMessage(rootId, message);
 };
+
+module.exports = sendToRoot;
+
+console.log(`Telegram bot init completed!`);
+
+sendToRoot(`I have started up =)`);
