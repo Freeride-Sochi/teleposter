@@ -1,6 +1,6 @@
+const sendTelegramMessage = require(`../telegram`);
 const inspect = require(`util`).inspect;
 const Busboy = require(`busboy`);
-const sendTelegramMessage = require(`../telegram`);
 
 const ifTruncated = (truncated) => {
   return truncated ? ` (truncated)` : ``;
