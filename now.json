@@ -1,0 +1,6 @@
+{
+  "env": {
+    "BOT_TOKEN": "@telegram-bot-token",
+    "ROOT_ID": "@telegram-root-id"
+  }
+}
