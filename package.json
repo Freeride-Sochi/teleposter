@@ -1,0 +1,23 @@
+{
+  "name": "teleposter",
+  "version": "1.0.0",
+  "description": "Posts form data to whatever source you need",
+  "main": "index.js",
+  "dependencies": {
+    "busboy": "0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Freeride-Sochi/teleposter.git"
+  },
+  "author": "Evgenii Shchepotev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Freeride-Sochi/teleposter/issues"
+  },
+  "homepage": "https://github.com/Freeride-Sochi/teleposter#readme"
+}
