@@ -2,6 +2,10 @@ const inspect = require(`util`).inspect;
 
 const Busboy = require(`busboy`);
 
+const ifTruncated = (truncated) => {
+  return truncated ? ` (truncated)` : ``;
+};
+
 module.exports = (req, res) => {
   if (req.method === `POST`) {
     const busboy = new Busboy({headers: req.headers});
@@ -15,11 +19,13 @@ module.exports = (req, res) => {
       });
       file.on(`end`, function () {
         console.log(`File [${fieldname}] Finished`);
-        data[fieldname] = `File: ${filename}. Size: ${size} bytes`;
+        if (filename) {
+          data[fieldname] = `File: ${filename}. Size: ${size} bytes`;
+        }
       });
     });
     busboy.on(`field`, function (fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-      console.log(`Field [${fieldname}](${fieldnameTruncated}: value: ${inspect(val)} (${valTruncated}), encoding: ${encoding}, mimetype: ${mimetype}`);
+      console.log(`Field [${fieldname}]${ifTruncated(fieldnameTruncated)}: value: ${inspect(val)}${ifTruncated(valTruncated)}, encoding: ${encoding}, mimetype: ${mimetype}`);
       data[fieldname] = val;
     });
     busboy.on(`finish`, function () {
