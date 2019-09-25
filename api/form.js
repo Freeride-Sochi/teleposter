@@ -1,6 +1,6 @@
 const inspect = require(`util`).inspect;
-
 const Busboy = require(`busboy`);
+const sendTelegramMessage = require(`../telegram`);
 
 const ifTruncated = (truncated) => {
   return truncated ? ` (truncated)` : ``;
@@ -31,6 +31,7 @@ module.exports = (req, res) => {
     busboy.on(`finish`, function () {
       console.log(`Done parsing form!`);
       res.json(data);
+      sendTelegramMessage(JSON.stringify(data));
       res.end();
     });
     req.pipe(busboy);
