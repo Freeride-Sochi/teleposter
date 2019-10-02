@@ -30,11 +30,14 @@ module.exports = (req, res) => {
     });
     busboy.on(`finish`, function () {
       console.log(`Done parsing form!`);
-      send(`Hello!`).then((data) => {
+      send(JSON.stringify(data)).then((data) => {
         res.json(data);
         res.end();
       })
-        .catch((err) => res.status(503).send(err));
+        .catch((err) => {
+          res.status(503).send(err);
+          res.end();
+        });
     });
     req.pipe(busboy);
   } else if (req.method === `GET`) {
