@@ -1,4 +1,4 @@
-const sendTelegramMessage = require(`../telegram`);
+const send = require(`../urlsender`);
 const inspect = require(`util`).inspect;
 const Busboy = require(`busboy`);
 
@@ -30,9 +30,11 @@ module.exports = (req, res) => {
     });
     busboy.on(`finish`, function () {
       console.log(`Done parsing form!`);
-      res.json(data);
-      sendTelegramMessage(JSON.stringify(data));
-      res.end();
+      send(`Hello!`).then((data) => {
+        res.json(data);
+        res.end();
+      })
+        .catch((err) => res.status(503).send(err));
     });
     req.pipe(busboy);
   } else if (req.method === `GET`) {
