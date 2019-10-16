@@ -6,7 +6,7 @@ const getData = (url, opts = {method: `GET`}, postData) => {
 
     const req = https.request(url, opts, (res) => {
       const {statusCode} = res;
-      console.log(`Gor response: ${statusCode}`);
+      console.log(`Got response: ${statusCode}`);
 
       console.log(`STATUS: ${res.statusCode}`);
       console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
