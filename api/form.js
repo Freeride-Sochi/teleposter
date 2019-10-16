@@ -7,7 +7,7 @@ const TEST_PAGE = `
 <html lang="en">
 <head><title>Test Form Post</title></head>
 <body>
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
     <input type="text" name="textfield"><br />
     <input type="file" name="filefield"><br />
     <input type="submit">\
