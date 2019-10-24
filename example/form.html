@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пример с отправкой формы</title>
+    <style type="text/css">
+        form {
+            margin: 0 auto;
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+<form action="http://localhost:3000/api/form"
+      method="POST"
+      enctype="application/x-www-form-urlencoded"
+      accept-charset="utf-8">
+    <label>Имя: <input type="text" name="Имя"></label>
+    <label>Email: <input type="email" name="Email"></label>
+    <label>Телефон: <input type="tel" name="Телефон"></label>
+    <label>
+        Время:
+        <select name="Время">
+            <option value="утро">Утро</option>
+            <option value="день">День</option>
+            <option value="вечер">Вечер</option>
+        </select>
+    </label>
+    <input type="hidden" value="">
+    <input type="submit">
+</form>
+</body>
+</html>
