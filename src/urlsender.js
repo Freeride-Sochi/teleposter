@@ -4,6 +4,8 @@ const send = require(`./loader`);
 const token = process.env.BOT_TOKEN;
 const rootId = process.env.ROOT_ID;
 
+const API_URL = process.env.API_URL || `https://api.telegram.org`;
+
 const sendToRoot = (message) => {
   console.log(`Token length: ${token.length}`);
   console.log(`Root id: ${rootId}`);
@@ -17,7 +19,7 @@ const sendToRoot = (message) => {
 
   console.log(`Sending message: ${msgData}`);
 
-  return send(`https://api.telegram.org/bot${token}/sendMessage`, {
+  return send(`${API_URL}/bot${token}/sendMessage`, {
     method: `POST`,
     headers: {
       'Content-Type': 'application/json',
