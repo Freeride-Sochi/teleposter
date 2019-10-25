@@ -2,7 +2,7 @@ const send = require(`../src/urlsender`);
 const loadForm = require(`../src/formloader`);
 const formatter = require(`../src/dataformatter.js`);
 
-const GET_RESPONSE = `
+const DEFAULT_GET_RESPONSE = `
 <!doctype html>
 <html lang="en">
 <head><title>Not allowed</title></head>
@@ -11,7 +11,7 @@ const GET_RESPONSE = `
 </body>
 </html>`;
 
-const SUCCESS_SEND_RESPONSE = `
+const DEFAULT_SUCCESS_RESPONSE = `
 <!doctype html>
 <html lang="en">
 <head><title>Form successfully sent!</title></head>
@@ -20,11 +20,21 @@ const SUCCESS_SEND_RESPONSE = `
 </body>
 </html>`;
 
+const DEFAULT_ERROR_RESPONSE = ({message}) => `
+<!doctype html>
+<html lang="en">
+<head><title>Form failed to send!</title></head>
+<body>
+  <h2>Failed to send form!</h2>
+  <p>${message}</p>
+</body>
+</html>`;
+
 module.exports = (req, res) => {
   switch (req.method) {
     case `GET`:
       res.writeHead(405, {Connection: `close`});
-      res.end(GET_RESPONSE);
+      res.end(DEFAULT_GET_RESPONSE);
       break;
     case `POST`:
       loadForm(req, (data) => {
@@ -39,11 +49,11 @@ module.exports = (req, res) => {
               'location': redirectUri
             });
           } else {
-            res.send(SUCCESS_SEND_RESPONSE);
+            res.send(DEFAULT_SUCCESS_RESPONSE);
           }
           res.end();
         }).catch((err) => {
-          res.status(503).send(err);
+          res.status(503).send(DEFAULT_ERROR_RESPONSE(err));
           res.end();
         });
       });
